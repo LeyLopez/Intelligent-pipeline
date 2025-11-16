@@ -1,0 +1,42 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Models
+models/*.pkl
+models/*.h5
+models/*.pth
+*.joblib
+
+# Data
+data/
+datasets/
+*.csv
+*.json
+
+# MLflow
+mlruns/
+mlartifacts/
+
+# Docker
+.dockerignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment
+.env
+.env.local
+
+# Logs
+*.log
+logs/
+EOF
