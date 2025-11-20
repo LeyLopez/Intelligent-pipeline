@@ -100,7 +100,7 @@ services:
     networks:
       - mlops-network
     depends_on:
-      - mlflow:
+      mlflow:
         condition: service_healthy
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
