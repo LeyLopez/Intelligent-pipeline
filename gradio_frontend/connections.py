@@ -38,7 +38,7 @@ def chat_with_llm(message:str, history:list)-> str:
                 "context": None if not history else history,
                 "max_tokens": 500
             },
-            timeout=10
+            timeout=180
         )
 
 
