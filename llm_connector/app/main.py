@@ -56,7 +56,7 @@ async def health():
     }
 
 
-@app.post("/generate", response_model=LLMResponse)
+@app.post("/chat", response_model=LLMResponse)
 async def chat(request: LLMRequest):
     logger.info(f"Received chat request: {request.prompt[:50]} for model: {settings.llm_model}")
 

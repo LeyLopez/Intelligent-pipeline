@@ -182,7 +182,7 @@ class CNNImageClassifier:
             raise ValueError("Model is not loaded. Please load or train the model before prediction.")
         
         img = Image.open(io.BytesIO(image_bytes))
-        img = img.convert("RGB")
+        img = img.convert('RGB')
         img = img.resize(self.image_size)
         img_array = np.array(img) / 255.0
         img_array = np.expand_dims(img_array, axis=0)

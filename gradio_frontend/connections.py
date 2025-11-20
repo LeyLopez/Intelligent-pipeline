@@ -1,10 +1,8 @@
-import gradio as gr
 import requests
 import os
 from typing import Dict, Tuple
-import json
-from PIL import Image
 import io
+from PIL import Image
 
 LLM_URL = os.getenv("LLM_SERVICE_URL", "http://localhost:8001")
 SKLEARN_URL = os.getenv("SKLEARN_SERVICE_URL", "http://localhost:8002")
@@ -14,7 +12,7 @@ CNN_URL = os.getenv("CNN_SERVICE_URL", "http://localhost:8003")
 def check_service_health()-> Dict[str, bool]:
     services = {
         "LLM": LLM_URL,
-        "SKLearn": SKLEARN_URL,
+        "Sklearn": SKLEARN_URL,
         "CNN": CNN_URL
     }
 
@@ -35,7 +33,11 @@ def chat_with_llm(message:str, history:list)-> str:
     try:
         response = requests.post(
             f"{LLM_URL}/chat",
-            json={"message": message, "history": history},
+            json={
+                "prompt": message,
+                "context": None if not history else history,
+                "max_tokens": 500
+            },
             timeout=10
         )
 
@@ -183,6 +185,7 @@ def get_model_info() -> str:
 **Type:** Random Forest Classifier
 **Dataset:** Iris (3 classes)
 **Features:** 4 features
+
 ## LLM Model
 
 **Provider:** Ollama
