@@ -9,15 +9,17 @@ services:
       - ollama-data:/root/.ollama
     networks:
       - mlops-network
+    depends_on:
+      mlflow:
+        condition: service_healthy
     environment:
-      - OLLAMA_HOST=0.0.0.0:11434
+      - OLLAMA_HOST=0.0.0.0
     entrypoint: >
       bash -c "
         ollama serve &
-        sleep 10 &&
-        echo "Downloading llama2 model..." &&
-        ollama pull llama2 &&
-        wait
+        sleep 5
+        ollama pull llama2
+        wait -n  
       "
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
@@ -33,17 +35,10 @@ services:
 
 
   mlflow:
-    image: python:3.11-slim
+    build:
+      context: ./mlflow
+      dockerfile: Dockerfile
     container_name: mlops-mlflow
-    command: >
-      bash -c "
-        pip install mlflow==2.9.0 &&
-        mlflow server
-        --host 0.0.0.0
-        --port 5000
-        --backend-store-uri sqlite:///mlflow.db
-        --default-artifact-root /mlflow/mlartifacts
-      "
     ports:
       - "5000:5000"
     volumes:
