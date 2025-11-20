@@ -10,6 +10,7 @@ import logging
 from datetime import datetime
 from .preprocess import DataPreprocessor
 from ..app.config import settings
+from typing import Tuple
 
 logger = logging.getLogger(__name__)
 

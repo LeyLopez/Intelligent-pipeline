@@ -1,7 +1,4 @@
 import gradio as gr
-import requests
-import json
-from PIL import Image
 from connections import chat_with_llm, predict_with_sklearn, classify_image, get_model_info
 
 

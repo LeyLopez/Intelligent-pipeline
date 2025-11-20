@@ -14,7 +14,7 @@ class Settings(BaseSettings):
     num_classes: int = 3
     class_names: List[str] = ["cat", "dog", "bird"]
 
-    mlflow_tracking_uri: str = "http://localhost:5000"
+    mlflow_tracking_uri: str = "http://mlflow:5000"
     mlflow_experiment_name: str = "cnn_image_classification"
 
     log_level: str = "INFO"

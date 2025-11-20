@@ -79,7 +79,7 @@ async def root():
 @app.get("/health")
 async def health():
     return {
-        "service": "healthy",
+        "service": "healthy" if model is not None else "degraded",
         "model_loaded": model is not None,
         "preprocessor_loaded": preprocessor is not None
     }

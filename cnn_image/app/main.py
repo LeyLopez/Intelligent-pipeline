@@ -12,7 +12,7 @@ import os
 
 from .config import settings
 from .model import CNNImageClassifier
-from ..filters.convolutions import ConvolutionFilters
+from filters.convolutions import ConvolutionFilters
 
 
 

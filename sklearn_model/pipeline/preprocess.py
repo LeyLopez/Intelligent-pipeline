@@ -21,7 +21,7 @@ class DataPreprocessor:
             y: Optional[pd.Series] = None
     )-> Tuple[np.ndarray, Optional[np.ndarray]]:
         
-        logger.info(f"Fitting and transforming the data:  {X.shape}")
+        logger.info(f"Preprocessing data:  {X.shape}")
 
         self.feature_names = X.columns.tolist()
 

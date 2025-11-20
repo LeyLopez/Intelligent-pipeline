@@ -65,7 +65,7 @@ class LLMClient:
     def health_check(self)->bool:
         try:
             response = requests.get(
-                f"{self.api_url}/api/health",
+                f"{self.api_url}/api/tags",
                 timeout=5
             )
             return response.status_code == 200
