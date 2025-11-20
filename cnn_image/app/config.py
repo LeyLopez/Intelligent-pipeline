@@ -1,4 +1,4 @@
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
 from typing import List
 
 class Settings(BaseSettings):
@@ -18,6 +18,10 @@ class Settings(BaseSettings):
     mlflow_experiment_name: str = "cnn_image_classification"
 
     log_level: str = "INFO"
+
+    model_config = {
+        "protected_namespaces": ()
+    }
 
     class Config:
         env_file = ".env"

@@ -53,7 +53,7 @@ with gr.Blocks(
                 placeholder="Type your message here...",
                 scale=4
             )
-            send_btn = gr.Button("Submit", scale=1, variant="primary", scale=1)
+            send_btn = gr.Button("Submit", scale=1, variant="primary")
 
         clear_btn = gr.Button("Clear Chat")
 
@@ -95,7 +95,7 @@ with gr.Blocks(
                 )
 
                 sepal_width = gr.Slider(
-                    minimun=2.0,
+                    minimum=2.0,
                     maximum=5.0,
                     value=3.5,
                     step=0.1,
@@ -205,7 +205,7 @@ with gr.Blocks(
 
     gr.Markdown(
     """
-    ### 📚 MLOps Final Project
+    ### MLOps Final Project
 
     **Componentes:**
     - LLM Connector (Ollama/LLaMA)

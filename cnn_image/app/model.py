@@ -84,32 +84,34 @@ class CNNImageClassifier:
 
         for class_idx in range(self.num_classes):
             for _ in range(samples_per_class):
-                img = np.random.randint(
-                    self.image_size[0],
+                img = np.random.rand(
+                    self.image_size[0], 
                     self.image_size[1],
-                    3
-                ) * 0.5
+                3                     
+                ) * 0.5  # Valores entre 0 y 0.5
 
-
+                
                 if class_idx == 0:
-                    img[:, :, 0] += 0.3
+                    img[:, :, 0] += 0.3 
                 elif class_idx == 1:
-                    img[:, :, 1] += 0.3
+                    img[:, :, 1] += 0.3 
                 else:
-                    img[:, :, 2] += 0.3
+                    img[:, :, 2] += 0.3 
 
                 img = np.clip(img, 0, 1)
 
                 X_list.append(img)
                 y_list.append(class_idx)
 
-
         X = np.array(X_list)
         y = np.array(y_list)
+
 
         indexes = np.random.permutation(len(X))
         X = X[indexes]
         y = y[indexes]
+
+        return X, y
 
     
 
