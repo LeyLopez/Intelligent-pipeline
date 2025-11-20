@@ -11,6 +11,14 @@ services:
       - mlops-network
     environment:
       - OLLAMA_HOST=0.0.0.0:11434
+    entrypoint: >
+      bash -c "
+        ollama serve &
+        sleep 10 &&
+        echo "Downloading llama2 model..." &&
+        ollama pull llama2 &&
+        wait
+      "
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
       interval: 30s
@@ -161,6 +169,8 @@ networks:
 
 
 volumes:
+  ollama-data:
+    name: mlops-ollama-data
   mlflow-data:
     name: mlops-mlflow-data
   sklearn-models:
