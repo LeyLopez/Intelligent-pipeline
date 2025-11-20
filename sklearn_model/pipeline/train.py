@@ -1,16 +1,19 @@
+import os
 import mlflow
 import mlflow.sklearn
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
-from skimage.datasets import load_iris
+from sklearn.datasets import load_iris
 import pandas as pd
 import joblib
 import logging
 from datetime import datetime
-from .preprocess import DataPreprocessor
-from ..app.config import settings
 from typing import Tuple
+
+# Importaciones absolutas
+from pipeline.preprocess import DataPreprocessor
+from app.config import settings
 
 logger = logging.getLogger(__name__)
 
@@ -91,12 +94,6 @@ class ModelTrainer:
                 self.model, "model", registered_model_name="sklearn_classifier"
             )
 
-            joblib.dump(
-                self.preprocessor,
-                "preprocessor.joblib"
-            )
-            mlflow.log_artifact("preprocessor.joblib")
-
             logger.info(f"Training completed with metrics: {metrics}")
 
             return metrics
@@ -106,9 +103,19 @@ class ModelTrainer:
     def save_model(self, model_path: str = None):
         if model_path is None:
             model_path = settings.model_path
+
+        os.makedirs(os.path.dirname(model_path), exist_ok=True)
         
         joblib.dump(self.model, model_path)
         logger.info(f"Model saved to {model_path}")
+        
+        # Guardar preprocessor en la misma carpeta
+        preprocessor_path = os.path.join(
+            os.path.dirname(model_path), 
+            "preprocessor.joblib"
+        )
+        joblib.dump(self.preprocessor, preprocessor_path)
+        logger.info(f"Preprocessor saved to {preprocessor_path}")
 
 
     
