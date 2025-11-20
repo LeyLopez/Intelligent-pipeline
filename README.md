@@ -1,5 +1,3 @@
-cd ../../
-cat > README.md << 'EOF'
 # 🤖 MLOps Final Project: Pipeline Inteligente
 
 [![CI/CD](https://github.com/usuario/mlops-final-project/workflows/MLOps%20CI/CD%20Pipeline/badge.svg)](https://github.com/usuario/mlops-final-project/actions)
