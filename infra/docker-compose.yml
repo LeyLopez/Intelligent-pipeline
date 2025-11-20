@@ -140,9 +140,9 @@ services:
     ports:
       - "7860:7860"
     environment:
-      - LLM_CONNECTOR_URL=http://llm-connector:8001
-      - SKLEARN_MODEL_URL=http://sklearn-model:8002
-      - CNN_IMAGE_URL=http://cnn-image:8003
+      - LLM_SERVICE_URL=http://llm-connector:8001
+      - SKLEARN_SERVICE_URL=http://sklearn-model:8002
+      - CNN_SERVICE_URL=http://cnn-image:8003
     networks:
       - mlops-network
     depends_on:
