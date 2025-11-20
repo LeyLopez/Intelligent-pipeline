@@ -7,7 +7,7 @@ class Setting(BaseSettings):
 
 
     llm_provider: str = "ollama"
-    llm_model: str = "llama2"
+    llm_model: str = "llama3.2:1b"
     llm_api_url: str = "http://ollama:11434"
 
     api_host: str = "0.0.0.0"

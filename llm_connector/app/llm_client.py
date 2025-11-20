@@ -30,8 +30,9 @@ class LLMClient:
         except Exception as e:
             logger.error(f"Error generando respuesta: {str(e)}")
             return {
-                "response": "Lo siento, hubo un error procesando tu solicitud.",
+                "response": "Sorry, there was an error processing your request.",
                 "error": str(e),
+                "model": self.model,
                 "status": "error"
             }
     
@@ -78,15 +79,15 @@ class LLMClient:
                 }
                 
             except requests.exceptions.ConnectionError as e:
-                logger.warning(f"Error de conexión (intento {attempt + 1}): {str(e)}")
+                logger.warning(f"Connection error (attempt {attempt + 1}): {str(e)}")
                 if attempt < self.max_retries - 1:
-                    logger.info(f"Reintentando en {self.retry_delay}s...")
+                    logger.info(f"Retrying in {self.retry_delay}s...")
                     time.sleep(self.retry_delay)
                 else:
                     raise
                     
             except requests.exceptions.Timeout:
-                logger.warning(f"Timeout en solicitud (intento {attempt + 1})")
+                logger.warning(f"Timeout in request (attempt {attempt + 1})")
                 if attempt < self.max_retries - 1:
                     time.sleep(self.retry_delay)
                 else:
@@ -104,11 +105,11 @@ class LLMClient:
                 models = data.get("models", [])
                 has_llama2 = any(m.get("name") == self.model for m in models)
                 
-                logger.info(f"LLM Health Check: OK. Modelos: {[m.get('name') for m in models]}")
+                logger.info(f"LLM Health Check: OK. Models: {[m.get('name') for m in models]}")
                 return has_llama2
             
             return False
             
         except Exception as e:
-            logger.warning(f"Health check falló: {str(e)}")
+            logger.warning(f"Health check failed: {str(e)}")
             return False

@@ -53,8 +53,9 @@ with gr.Blocks(
                 placeholder="Type your message here...",
                 scale=4
             )
-            send_btn = gr.Button("Submit", scale=1, variant="primary")
-
+        
+        
+        send_btn = gr.Button("Submit", scale=1, variant="primary")
         clear_btn = gr.Button("Clear Chat")
 
 
@@ -156,7 +157,7 @@ with gr.Blocks(
 
         gr.Markdown(
             """
-            <div class="warning">
+            <div class="danger">
                  <b>Warning:</b> This model has limitted capabilities.
                  It only recognizes three classes: Cat, Dog, and Bird.
                  Any other image will likely lead to incorrect predictions.

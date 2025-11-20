@@ -18,9 +18,6 @@ class Settings(BaseSettings):
 
     log_level: str = "INFO"
 
-    model_config = {
-        "protected_namespaces": ()  # Permite usar campos que empiezan con "model_"
-    }
 
     class Config:
         env_file = ".env"
